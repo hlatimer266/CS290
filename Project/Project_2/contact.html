@@ -1,0 +1,127 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Contact</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
+    <style id="holderjs-style" type="text/css"></style>
+
+</head>
+
+  <body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="home_page.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Projects.html">PROJECTS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Personal.html">PERSONAL INTERESTS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">CONTACT</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+    <div id="wrap">
+      <section id="about">
+        <div class="container" style="margin-bottom: 2em">
+          <form>
+            <fieldset>
+                <legend>Get In Touch!</legend>
+                <label>Name:
+                    <input type="text" name="name" size="30" maxlength="100">
+                </label>
+                <br />
+                <label>Email:
+                    <input type="email" name="email" size="30" maxlength="100">
+                </label>
+                <br />
+                <label for="comments">Comments:</label>
+                    <br />
+                    <textarea rows="4" cols="40" id="comments"></textarea>
+                    <br>
+                <input type="submit" value="Submit Info" id="submit" />
+            </fieldset>
+          </form>
+                
+            <br>
+              
+          <div class="social">
+            <ul class="social-links">
+              <li><a href="https://github.com/hlatimer266"><i class="fa fa-github"></i></a></li>
+              <li><a href="mailto:hlatimer266@gmail.com"><i class="fa fa-envelope"></i></a></li>
+              <li><a href="https://www.linkedin.com/in/harrison-latimer-75b74073/"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  <footer>
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted">
+            
+        </p>
+      </div>
+    </div>
+  </footer>
+  <div class="footer"></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', bindButtons);
+
+    function bindButtons(){
+        document.getElementById('submit').addEventListener('click', function(event){
+        var req = new XMLHttpRequest();
+        var payload = {name:null,email:null,comments:null};
+
+        payload.name = document.getElementById('name').value;
+        payload.email = document.getElementById('email').value;
+        payload.comments = document.getElementById('comments').value;
+
+        console.log(payload);
+
+        req.open('POST', ' http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php', true);
+        req.setRequestHeader('Content-Type', 'application/json');
+        req.addEventListener('load',function(){
+          if(req.status >= 200 && req.status < 400){
+            var response = JSON.parse(req.responseText);
+            document.getElementById('shortUrl').textContent = payload;
+            console.log(response);
+          } else {
+            console.log("Error in network request: " + req.statusText);
+          }});
+        req.send(JSON.stringify(payload));
+        event.preventDefault();
+      });}
+</script>
+</html>

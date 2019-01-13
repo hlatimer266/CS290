@@ -1,0 +1,30 @@
+table{
+    border-style:solid;
+    border-color:gray;
+}
+th, td{
+    border-style:solid;
+}
+tbody>tr:nth-child(odd){
+  background-color:green;
+}
+tbody>tr:nth-child(even){
+  background-color:gray;
+}
+.outer-content {
+  width: 75%;
+  background-color: pink;
+  padding: 20px;
+  position: relative;
+  left: 0px;
+}
+.inner-content {
+  background-color: lightblue;
+  width: 75%;
+  text-align: center;
+  margin: 0 auto;
+}
+.row_one {
+  text-align: center;
+  font-style: italic;
+}

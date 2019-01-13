@@ -1,0 +1,82 @@
+element.style {
+}
+p {
+    text-align: left;
+    padding-left: 5px;
+}
+html, body {
+    height: 100%;
+    background-color: #fff;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-top: 3px solid #037117;
+}
+html {
+    font-size: 10px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html[Attributes Style] {
+    -webkit-locale: "ru";
+}
+user agent stylesheet
+html {
+    display: block;
+}
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+background-color:
+rgb(255, 255, 255)
+;
+border-top-color:
+rgb(39, 168, 34)
+;
+border-top-style:
+solid
+;
+border-top-width:
+3px
+;
+box-sizing:
+border-box
+;
+display:
+block
+;
+font-family:
+"Source Sans Pro", sans-serif
+;
+font-size:
+10px
+;
+height:
+636px
+;
+text-size-adjust:
+100%
+;
+width:
+799px
+;
+-webkit-locale:
+"ru"
+;
+-webkit-tap-highlight-color:
+rgba(0, 0, 0, 0)
+;

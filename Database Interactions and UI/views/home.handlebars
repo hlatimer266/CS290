@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<link rel="stylesheet" href="stylesheet.css" type="text/css">
+  </head>
+  <body>
+<form>
+    <fieldset size="100">
+        <legend> Add Exercise!</legend>
+            <label>Name:
+              <input type="text" id="name" name="name" size="30" maxlength="100">
+            </label>
+              <br />
+            <label>Reps:
+              <input type="text" id="reps" name="reps" size="30" maxlength="100">
+            </label>
+            <br />
+            <label>Weight:
+            <input type="text" id="weight" name="weight" size="30" maxlength="100">
+            </label>
+           <br>
+           <label>Date:
+            <input type="date" id="date" name="date" size="30" maxlength="100">
+            </label>
+            <br />
+            <label>lbs (if unchecked units = kgs):
+            <input type="checkbox" name="lbs" id="lbs">
+            </label>
+            <br/>
+         <input type="submit" value="Submit" id="submit"/>
+    </fieldset>
+</form>
+
+	<h2>Exercise Contents</h2>
+	<table id="table">
+		<tr>
+			<th>Name</th>
+			<th>reps</th>
+			<th>weight</th>
+			<th>date</th>
+			<th>units</th>
+		</tr>
+		{{#each results}}
+			<tr id={{this.id}}>
+        <input type="hidden" id="id_in" value={{this.id}} />
+				<td id="name">{{this.name}}</td>
+				<td id="reps">{{this.reps}}</td>
+				<td id="weight">{{this.weight}}</td>
+				<td id="date">{{moment this.date format="MM-DD-YYYY"}}</td>
+        {{#if this.lbs}}
+					<td id="lbs">lbs</td>
+				{{else}}
+					<td id="lbs">kgs</td>
+    		{{/if}}
+				<td><input type="button" id="edit" value="Edit" onclick="window.location.href='/update?id='+{{this.id}}" /></td>
+				<td><input type="button" id="delete" value="Delete" onclick="deleteRow({{this.id}})"/></td>
+			</tr>
+		{{/each}}
+	</table>
+
+</body>
+<script src="script.js"></script>
+</html>
+

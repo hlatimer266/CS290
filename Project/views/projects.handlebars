@@ -1,0 +1,287 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Projects</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
+
+    
+<script async="" src=""></script>
+
+<script></script>
+
+  <style id="holderjs-style" type="text/css"></style>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/projects">PROJECTS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/personal">PERSONAL INTERESTS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">CONTACT</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    <div id="wrap">
+      
+
+      <section id="about">
+        <div class="container" style="margin-bottom: 2em">
+
+        
+<br>
+        
+<h2 style="margin-bottom: 1em;">Projects</h2>
+
+      <!-- Codes by HTMLcodes.ws -->
+<div class="row">
+  <div class="column" style="border:1px solid black;width:450px;height:250px;overflow:scroll;margin-bottom: 2em;" >
+  <font face = "Courier">
+    <h2>3D Beam Profile Python Script</h2>
+        <p align="left">
+            # Program takes in csv and generates 3D profile of E-gun beam</p>
+            <p align="left">import pandas as pd 
+            <p align="left">from scipy.interpolate import griddata </p>
+            <p align="left">
+            from mpl_toolkits.mplot3d import Axes3D
+            from matplotlib import cm
+            from matplotlib.ticker 
+            import LinearLocator, FormatStrFormatter
+            import matplotlib.pyplot as plt
+            import numpy as np</p>
+
+            <p align="left"># Read CSV file and generate axies
+              x = np.genfromtxt("E:\XX_scan0330.csv", skip_header=15, delimiter=",")
+              x_t = np.transpose(x[:,0])
+              y_t = np.transpose(x[:,1])
+              z_t = np.transpose(x[:,2])</p>
+
+
+            <p align="left"># Transpose x and y axies. Use x and y values to interpolate z
+            x1 = np.linspace(x_t.min(), x_t.max(), len(np.unique(x_t)))
+            y1 = np.linspace(y_t.min(), y_t.max(), len(np.unique(y_t)))
+            x2, y2 = np.meshgrid(x1, y1)
+            z2 = griddata((x_t, y_t), z_t, (x2, y2), method='cubic')
+
+            # Plot 3D surface
+            fig = plt.figure()
+            ax = fig.gca(projection='3d')
+            surf = ax.plot_surface(x2, y2, z2, rstride=1, cstride=1, cmap=cm.coolwarm,
+            linewidth=0, antialiased=False)
+            ax.set_zlim(0, 35)
+
+            # Format Z axis
+            ax.zaxis.set_major_locator(LinearLocator(10))
+            ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
+
+            fig.colorbar(surf, shrink=0.5, aspect=5)
+            plt.title('Beam Profile')
+            plt.show()</p>
+      </font>
+      </div>
+
+      <div class="column" style="padding-left: 5px;">
+        <p>The script to the left takes in beam current data from the bottom surface</p> 
+        <p>of a faraday cup using a pico ammeter. Each record has an x,y,z location </p>
+        <p>which is used to generate the surface.</p>
+      </div>
+
+      </div>
+
+      <div class="row">
+  <div class="column" style="border:1px solid black;width:450px;height:250px;overflow:scroll;margin-bottom: 2em;" >
+  <font face = "Courier">
+    <p> # Author: Harrison Latimer </p>
+    <p> # Create Date: 7/24/2018 </p>
+    <p> # Description: Script scrapes the exchange rate of yen </p>
+    <p> #        and writes to SL table. Dependencies are </p>
+    <p> #        are located in C:\\PythonPath\\pkgs </p>
+    <p> # </p>
+    <p> # ------------------------------------------------------------------- </p>
+    <p> # Rev     Date            Initials            Notes
+        # 0       7/24/2018       HL                  Created </p>
+        #
+        # Rev     Date            Initials            Notes
+        # 1       9/5/2018       HL                  Added error handling
+     <p># ------------------------------------------------------------------- </p>
+
+
+    <p> from bs4 import BeautifulSoup
+        import pandas as pd
+        pd.core.common.is_list_like = pd.api.types.is_list_like
+        import urllib.request
+        import pymssql
+        import quandl
+        import ssl </p>
+
+      <p>ssl._create_default_https_context = ssl._create_unverified_context </p>
+
+    <p> # Server Definitions
+        server_FJ = "XXXXXX"
+        database_FJ = "XXXXX"
+        port_FJ = 22 </p>
+
+      <p> # Stored Procedures
+        yenAlert = "exec fc_sp_Email_YenAlert %s , %d"
+        dbWrite = "exec fc_sp_YenScrape %d,%d,%d" </p>
+
+       <p> # Web page to scrape
+        wallstreet_page = 'http://www.wsj.com/mdc/public/page/2_3023-keyrates.html?mod=topnav_2_3051'
+        validIndex = True </p>
+
+      <p>  # Confirm web page is valid then open the web page
+        try:
+            page = urllib.request.urlopen(wallstreet_page)
+            validUrl = True
+        except urllib.error.HTTPError as err:
+            validUrl = False
+            errorCode = err.code </p>
+
+       <p> # Parse and scrape the page for the exchange rate of Yen if URL is valid
+        if validUrl:
+            page = urllib.request.urlopen(wallstreet_page)
+            soup = BeautifulSoup(page, 'html.parser')
+            price_box = soup.find_all('td', attrs={'class': 'num'})
+
+            # Confirm valid index for scrape
+            try:
+                price = price_box[7].text
+            except IndexError as idxError:
+                indexError = str(idxError)
+                validIndex = False </p>
+
+        <p># Get Exchange Rate from the past 7 days
+        quandl.ApiConfig.api_key = "q7H-nbgNh1dzwRtJyt8z"
+        mydata = quandl.get("BOE/XUDLJYD", rows=7)</p>
+
+       <p> ratePrev = float(mydata.max()) </p>
+
+        <p>maxjpy = float(price)+(abs(ratePrev-float(price))*3)</p>
+        <p>minjpy = (float(price)-(abs(ratePrev-float(price))*3))</p>
+
+        <p># Function that returns false if price can't be converted to a floating point number
+        def isFloat(s):
+            try:
+                float(s)
+                return True
+            except ValueError:
+                return False </p>
+
+
+       <p> # Check to see if URL and Index Array are Valid </p>
+       <p> f validUrl and validIndex:
+            # Verify value scraped can be converted to floating point number
+            if isFloat(price) is not True:
+                conn = pymssql.connect(server=server_FJ, database=database_FJ, port=port_FJ)
+                cursor = conn.cursor()
+                cursor.execute(yenAlert, (price, 4))
+                conn.commit()
+                conn.close()</p>
+        <p> else:
+                # Validate exchange rate against the max and min value from the past week
+                if float(price) > maxjpy:
+                    conn = pymssql.connect(server=server_FJ, database=database_FJ, port=port_FJ)
+                    cursor = conn.cursor()
+                    cursor.execute(yenAlert, (price, 1))
+                    conn.commit()
+                    conn.close()
+                elif float(price) < minjpy:
+                    conn = pymssql.connect(server=server_FJ, database=database_FJ, port=port_FJ)
+                    cursor = conn.cursor()
+                    cursor.execute(yenAlert, (price, 1))
+                    conn.commit()
+                    conn.close()
+                else:
+                    # Connect to SQL Server and commit changes.
+                    reciprocal = 1 / float(price)
+                    conn = pymssql.connect(server=server_FJ, database=database_FJ, port=port_FJ)
+                    cursor = conn.cursor()
+                    cursor.executemany(dbWrite, [(price, reciprocal, 1)])
+                    conn.commit()
+                    conn.close() </p>
+<p>       elif validIndex is not True:
+            conn = pymssql.connect(server=server_FJ, database=database_FJ, port=port_FJ)
+            cursor = conn.cursor()
+            cursor.execute(yenAlert, (indexError, 3))
+            conn.commit()
+            conn.close()
+        else:
+            conn = pymssql.connect(server=server_FJ, database=database_FJ, port=port_FJ)
+            cursor = conn.cursor()
+            cursor.execute(yenAlert, (errorCode, 2))
+            conn.commit()
+            conn.close()
+  </p>
+
+      </font>
+      </div>
+
+      <div class="column" style="padding-left: 5px;">
+        <p>The script to the left scrapes exchange rate of yen and writes it to </p> 
+        <p> a local database. The script has error hanlding to catch exchange </p>
+        <p> rates outside of historic averages, alerts if scrape fails, and  </p>
+        <p> confirms the scraped index is valid i.e. not a string</p>
+      </div>
+
+      </div>
+      <a href="./H_Latimer_CV.pdf" download="H_Latimer_CV.pdf" align="center">
+    <button>Download CV</button>
+    </a>
+    </div>
+
+    </a>
+      
+          
+    </div>
+      
+
+  </div>
+
+
+  
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">
+          
+      </p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
